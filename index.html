@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>តេស្តវាយអក្សរខ្មែរ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Khmer OS Siemreap';
+            src: local('Khmer OS Siemreap'),
+                 url('https://fonts.gstatic.com/s/notosanskhmer/v20/ijw3s5roRME5LLRxjsRb-gssOenAyWNxWP5Fg.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Hanuman';
+            src: local('Hanuman'),
+                 url('https://fonts.gstatic.com/s/notoserifkhmer/v21/-F6qfiZq69zL6U2Qz_9YQj_0pj61a2G5_niF.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="logo">
+            </div>
+        </header>
+
+        <div class="display-row">
+            <div class="keystroke-info">
+                <div id="next-keystroke" class="next-keystroke"></div>
+                <div id="english-equivalent" class="english-equivalent-display"></div>
+            </div>
+            <div id="timer-display" class="timer-display hidden timer-box">
+                <div class="timer-toggle">
+                    <button class="timer-toggle-option red selected" data-time="30">30</button>
+                    <button class="timer-toggle-option orange" data-time="60">60</button>
+                    <button class="timer-toggle-option green inf-toggle" data-time="0">∞</button>
+                </div>
+                <span id="timer" class="timer-value">30</span>
+            </div>
+        </div>
+
+        <div class="wpm-display">
+            <span id="wpm" class="wpm-value">0</span>
+            <span class="wpm-label-khmer">ពាក្យក្នុងមួយនាទី</span>
+        </div>
+        <div class="accuracy-display">
+            <span id="accuracy" class="accuracy-value">0</span>
+            <span class="accuracy-label-khmer">ភាពត្រឹមត្រូវ</span>
+        </div>
+
+        <div id="text-to-type-container" tabindex="0">
+            <div id="text-to-type">
+            </div>
+        </div>
+
+        <textarea id="input-area"
+                  lang="km"
+                  autofocus
+                  spellcheck="false"
+                  autocapitalize="none"
+                  autocomplete="off"
+                  autocorrect="off"
+                  rows="1">
+        </textarea>
+
+        <div id="virtual-keyboard-container" class="virtual-keyboard-container hidden">
+        </div>
+
+        <div class="controls">
+            <button id="toggle-keyboard-button" title="បង្ហាញ/លាក់ក្តារចុចនិម្មិត">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20 5H4C2.89543 5 2 5.89543 2 7V17C2 18.1046 2.89543 19 4 19H20C21.1046 19 22 18.1046 22 17V7C22 5.89543 21.1046 5 20 5ZM4 7H20V10H4V7ZM4 12H7V14H4V12ZM9 12H12V14H9V12ZM14 12H17V14H14V12ZM4 15H7V17H4V15ZM9 15H12V17H9V15ZM14 15H17V17H14V15ZM18 12H20V17H18V12Z"></path></svg>
+            </button>
+            <button id="reset-button" title="ចាប់ផ្តើមឡើងវិញ (Ctrl + Shift + R)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.5374 19.5674C16.7844 21.0831 14.4993 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 14.1355 21.3302 16.1158 20.1892 17.7408L17.7583 15.31C18.0499 14.3687 18.2222 13.3639 18.2222 12.2727C18.2222 8.82037 15.4019 6 12 6C8.59812 6 5.77778 8.82037 5.77778 12.2727C5.77778 15.7251 8.59812 18.5455 12 18.5455C13.8351 18.5455 15.4915 17.8064 16.7096 16.5883L18.5374 19.5674ZM20 5H22V2H19V4L16.8919 2.89191C17.5998 2.32666 18.3971 1.88251 19.2598 1.57409L19.8329 0.167075C18.7773 0.533381 17.7908 1.05803 16.8919 1.71603L14.9985 0.768066L14.2319 2.43203L16.1254 3.37999C15.3887 4.04033 14.7606 4.80186 14.2681 5.63806L12.5 5V7H14.5L17.5 7H20V5Z"></path></svg>
+            </button>
+        </div>
+         <p class="tip">
+            ចុច <kbd>⌘</kbd> + <kbd>K</kbd> ដើម្បីបង្ហាញ/លាក់ក្តារចុច។<br>
+            ចុច <kbd>⌘</kbd> + <kbd>,</kbd> ដើម្បីផ្អាក។<br>
+            ចុច <kbd>⌘</kbd> + <kbd>.</kbd> ដើម្បីចាប់ផ្តើមឡើងវិញ។<br>
+            ចុច <kbd>⌘</kbd> + <kbd>I</kbd> ដើម្បីបង្ហាញព័ត៌មានជំនួយ។
+         </p>
+        <div id="results" class="results hidden">
+            <div class="results-content">
+                <div class="results-graph-section">
+                    <div class="graph-container">
+                        <canvas id="speed-graph"></canvas>
+                    </div>
+                </div>
+                <div class="results-stats-section">
+                    <div class="stat-block">
+                        <div class="stat-value" id="avg-wpm">0</div>
+                        <div class="stat-label-khmer">ពាក្យក្នុងមួយនាទី</div>
+                    </div>
+                    <div class="stat-block">
+                        <div class="stat-value" id="final-accuracy">0%</div>
+                        <div class="stat-label-khmer">ភាពត្រឹមត្រូវ</div>
+                    </div>
+                    <div class="stat-block">
+                        <div class="stat-value" id="peak-wpm">0</div>
+                        <div class="stat-label-khmer">ល្បឿនខ្ពស់បំផុត</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="app-footer hidden">
+            <p>យើងណែនាំឱ្យប្រើ Firefox សម្រាប់បទពិសោធន៍វាយអក្សរខ្មែរល្អបំផុត។</p>
+        </footer>
+    </div>
+
+    <script type="module" src="khmer_words.js"></script>
+    <script type="module" src="khmer_texts.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
