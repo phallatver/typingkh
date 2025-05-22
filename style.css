@@ -34,6 +34,7 @@ body {
     border-radius: 8px;
     width: 100%;
     max-width: 900px;
+    min-width: 800px;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -229,7 +230,7 @@ body {
 .tip {
     position: fixed;
     left: 24px;
-    top: 24px;
+    bottom: 24px;
     transform: none;
     font-size: 0.9em;
     color: var(--text-dim-color);
@@ -818,5 +819,156 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 
 .container {
     padding-bottom: calc(var(--container-padding) + 50px);
+}
+
+/* Media queries for laptop and larger screens */
+@media (min-width: 1024px) {
+    body {
+        padding: 0 40px;
+    }
+
+    .container {
+        margin-top: 80px;
+        gap: 32px;
+    }
+
+    #text-to-type {
+        font-size: 2.6em;
+        line-height: 2;
+    }
+
+    .timer-value {
+        font-size: 4.2rem;
+    }
+
+    .timer-label {
+        font-size: 1rem;
+    }
+
+    .next-keystroke {
+        width: 90px;
+        height: 90px;
+        min-width: 90px;
+        font-size: 3rem;
+    }
+
+    .english-equivalent-display {
+        font-size: 1.5rem;
+    }
+
+    .virtual-keyboard-container {
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .keyboard-key {
+        min-width: 50px;
+        height: 72px;
+        font-size: 1.3em;
+    }
+
+    .results {
+        padding: 40px 24px;
+    }
+
+    .stat-value {
+        font-size: 2.8rem;
+    }
+
+    .stat-label-khmer {
+        font-size: 1.2rem;
+    }
+
+    .wpm-display,
+    .accuracy-display {
+        width: 90px;
+        height: 90px;
+        min-width: 90px;
+    }
+
+    .wpm-value,
+    .accuracy-value {
+        font-size: 3rem;
+    }
+
+    .wpm-label-khmer,
+    .accuracy-label-khmer {
+        font-size: 1.1rem;
+    }
+
+    .tip {
+        bottom: 32px;
+    }
+
+    .virtual-keyboard-container:not(.hidden) ~ .tip,
+    .results:not(.hidden) ~ .tip {
+        bottom: 200px;
+    }
+}
+
+/* Media query for very large screens */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1200px;
+        min-width: 1000px;
+    }
+
+    #text-to-type {
+        font-size: 2.8em;
+    }
+
+    .timer-value {
+        font-size: 4.6rem;
+    }
+
+    .next-keystroke {
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+        font-size: 3.2rem;
+    }
+
+    .virtual-keyboard-container {
+        padding: 24px;
+        gap: 12px;
+    }
+
+    .keyboard-key {
+        min-width: 55px;
+        height: 76px;
+        font-size: 1.4em;
+    }
+
+    .tip {
+        bottom: 40px;
+    }
+
+    .virtual-keyboard-container:not(.hidden) ~ .tip,
+    .results:not(.hidden) ~ .tip {
+        bottom: 220px;
+    }
+}
+
+/* Hide the website on smaller screens */
+@media (max-width: 799px) {
+    body::before {
+        content: "យើងណែនាំឱ្យប្រើអេក្រង់ធំជាង 800px ដើម្បីបទពិសោធន៍ល្អបំផុត។";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--bg-color);
+        color: var(--text-color);
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        z-index: 9999;
+        font-size: 1.2em;
+        max-width: 90%;
+    }
+
+    .container {
+        display: none;
+    }
 }
 
